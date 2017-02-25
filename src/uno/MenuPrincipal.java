@@ -38,7 +38,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             System.out.println("paso");
         }
         
-        jLabel2.setIcon(imagen[1]);
+        jLabel2.setIcon(new ImageIcon(imagen[1].getImage().getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_DEFAULT)));
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -143,7 +143,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         String  cinpeli[]=car.getPeliculas();
         con++;
         
-        jLabel2.setIcon(imagen[con]);
+        jLabel2.setIcon(new ImageIcon(imagen[con].getImage().getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_DEFAULT)));
         String [][] horarios=car.getHorarios();
         for (int i = 0; i < horarios.length; i++) {
             if (true) {
@@ -166,7 +166,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         
         
         
-        jLabel2.setIcon(imagen[con]);
+        jLabel2.setIcon(new ImageIcon(imagen[con].getImage().getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_DEFAULT)));
         String [][] horarios=car.getHorarios();
         for (int i = 0; i < horarios.length; i++) {
             if (true) {
