@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package uno;
+import java.awt.Image;
+import javax.swing.*;
 import javax.swing.ImageIcon;
 /**
  *
@@ -12,21 +14,25 @@ import javax.swing.ImageIcon;
 public class MenuPrincipal extends javax.swing.JFrame {
     Cartelera car;
     Empleados emp;
-    ImageIcon imagen[];
+    ImageIcon imagen[]= new ImageIcon[12];
     int con=1;
+    Icon icono[];
     /**
      * Creates new form MenuPrincipal
      */
     public MenuPrincipal() {
+        
         car=new Cartelera();
         emp=new Empleados();
         
         initComponents();
-         imagen= new ImageIcon[12];
+          //ImageIcon icono = new ImageIcon(imagen.getImage().getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_DEFAULT));
+            //jLabe2.setIcon(icono);
         String[] peliculas=car.getPeliculas();
-        for (String pelicula : peliculas) {
-            jComboBox1.addItem(pelicula);
-        }
+        
+        
+        
+        
         for (int i = 1; i <= 4; i++) {
             imagen[i] = new ImageIcon(getClass().getResource((i)+".jpg"));
             System.out.println("paso");
@@ -39,7 +45,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox();
         jComboBox2 = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         siguiente = new javax.swing.JButton();
@@ -47,16 +52,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("SELECCION"));
-
-        jComboBox1.setBackground(new java.awt.Color(204, 204, 204));
-        jComboBox1.setToolTipText("uno");
-        jComboBox1.setBorder(javax.swing.BorderFactory.createTitledBorder("PELICULA"));
-        jComboBox1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboBox1ItemStateChanged(evt);
-            }
-        });
 
         jComboBox2.setBorder(javax.swing.BorderFactory.createTitledBorder("HORARIOS"));
         jComboBox2.addItemListener(new java.awt.event.ItemListener() {
@@ -71,17 +66,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jComboBox2, 0, 285, Short.MAX_VALUE)
-                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jComboBox2, 0, 285, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70)
+                .addGap(167, 167, 167)
                 .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(375, Short.MAX_VALUE))
         );
@@ -121,18 +112,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
-        jComboBox2.removeAllItems();
-        
-        String [][] horarios=car.getHorarios();
-        for (int i = 0; i < horarios.length; i++) {
-            if (true) {
-            jComboBox2.addItem(horarios[jComboBox1.getSelectedIndex()][i]);
-            }
-        }
-        jLabel2.setIcon(imagen[jComboBox1.getSelectedIndex()]);
-    }//GEN-LAST:event_jComboBox1ItemStateChanged
 
     private void jComboBox2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox2ItemStateChanged
         // TODO add your handling code here:
@@ -195,7 +174,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
