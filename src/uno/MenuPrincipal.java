@@ -5,6 +5,8 @@
  */
 package uno;
 import java.awt.Image;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.*;
 import javax.swing.ImageIcon;
 /**
@@ -12,88 +14,126 @@ import javax.swing.ImageIcon;
  * @author jonathan
  */
 public class MenuPrincipal extends javax.swing.JFrame {
-    Cartelera car;
-    Empleados emp;
+    Cartelera car=new Cartelera();
+    Cartelera cartelera[]=new Cartelera[20];
+    Empleados emp=new Empleados();
     ImageIcon imagen[]= new ImageIcon[12];
+    String horarios[][]=car.getHorarios();
+     String[] peliculas=car.getPeliculas();
     int con=1;
     Icon icono[];
     /**
      * Creates new form MenuPrincipal
      */
     public MenuPrincipal() {
-        
-        car=new Cartelera();
-        emp=new Empleados();
-        
-        initComponents();
+     initComponents(); 
           //ImageIcon icono = new ImageIcon(imagen.getImage().getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_DEFAULT));
             //jLabe2.setIcon(icono);
-        String[] peliculas=car.getPeliculas();
+         listarImagenes();
+         listarHorarios();
+        getHoraActual();
+        jlSala.setText("Sala: "+con);
         
-        
-        
-        
-        for (int i = 1; i <= 4; i++) {
+       
+    }
+    public void listarImagenes(){
+     for (int i = 1; i <= 4; i++) {
             imagen[i] = new ImageIcon(getClass().getResource((i)+".jpg"));
             System.out.println("paso");
         }
         
         jLabel2.setIcon(new ImageIcon(imagen[1].getImage().getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_DEFAULT)));
     }
+     public void listarHorarios () {
+        cbHorarios.removeAllItems();
+        SimpleDateFormat formato = new SimpleDateFormat("hh:mm aa");
+        Date horario;
+        String h;
+        try {
+            for (int i = 0; i < horarios.length; i++) {
+                horario = formato.parse(horarios[i][con-1]);
+                h = formato.format(horario);
+                if (horario.after(formato.parse(getHoraActual()))) {
+                    cbHorarios.addItem(h);
+                }
+            }
+        } catch (Exception e) {
+           e.printStackTrace();
+        }
+    }
+  public String getHoraActual (){
+SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
+      Date horaActual = new Date();
+      String horaConFormato = format.format(horaActual);
+      return horaConFormato;
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jComboBox2 = new javax.swing.JComboBox();
+        cbHorarios = new javax.swing.JComboBox();
+        jlSala = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         siguiente = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jlPelicula = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("SELECCION"));
 
-        jComboBox2.setBorder(javax.swing.BorderFactory.createTitledBorder("HORARIOS"));
-        jComboBox2.addItemListener(new java.awt.event.ItemListener() {
+        cbHorarios.setBorder(javax.swing.BorderFactory.createTitledBorder("HORARIOS"));
+        cbHorarios.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboBox2ItemStateChanged(evt);
+                cbHorariosItemStateChanged(evt);
             }
         });
+
+        jlSala.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jlSala.setText("...");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jComboBox2, 0, 285, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbHorarios, javax.swing.GroupLayout.Alignment.TRAILING, 0, 285, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jlSala)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(167, 167, 167)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(375, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jlSala)
+                .addGap(142, 142, 142)
+                .addComponent(cbHorarios, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(367, Short.MAX_VALUE))
         );
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
-        siguiente.setText("siguiente");
+        siguiente.setText(">>");
         siguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 siguienteActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Anterior");
+        jButton1.setText("<<");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        jlPelicula.setText("...");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -101,22 +141,30 @@ public class MenuPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(142, 142, 142)
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(siguiente)))
+                        .addGap(53, 53, 53))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(142, 142, 142)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(siguiente)))
-                .addGap(53, 53, 53))
+                        .addGap(76, 76, 76)
+                        .addComponent(jlPelicula)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addGap(19, 19, 19)
+                .addComponent(jlPelicula)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -128,54 +176,43 @@ public class MenuPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox2ItemStateChanged
+    private void cbHorariosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbHorariosItemStateChanged
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ItemStateChanged
+    }//GEN-LAST:event_cbHorariosItemStateChanged
 
     private void siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteActionPerformed
-        // TODO add your handling code here:
-        jComboBox2.removeAllItems();
+     
+        cbHorarios.removeAllItems();
         
         if(con==4)
         {
             con=0;
         }
-        String  cinpeli[]=car.getPeliculas();
+       
         con++;
-        
+          jlSala.setText("Sala: "+con);
         jLabel2.setIcon(new ImageIcon(imagen[con].getImage().getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_DEFAULT)));
-        String [][] horarios=car.getHorarios();
-        for (int i = 0; i < horarios.length; i++) {
-            if (true) {
-            jComboBox2.addItem(horarios[con-1][i]);
-            }
-        }
+       // String [][] horarios=car.getHorarios();
+      listarHorarios();
         
     }//GEN-LAST:event_siguienteActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        jComboBox2.removeAllItems();
+       
+        cbHorarios.removeAllItems();
         
         if(con==1)
         {
             con=5;
         }
-        String  cinpeli[]=car.getPeliculas();
+        //String  cinpeli[]=car.getPeliculas();
         con--;
+         jlSala.setText("Sala: "+con);
         
         
         
         jLabel2.setIcon(new ImageIcon(imagen[con].getImage().getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_DEFAULT)));
-        String [][] horarios=car.getHorarios();
-        for (int i = 0; i < horarios.length; i++) {
-            if (true) {
-            jComboBox2.addItem(horarios[con-1][i]);
-            }
-        }
-       
-        
-        System.out.println("a"+con);
+         listarHorarios();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -214,10 +251,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox cbHorarios;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jlPelicula;
+    private javax.swing.JLabel jlSala;
     private javax.swing.JButton siguiente;
     // End of variables declaration//GEN-END:variables
 }
