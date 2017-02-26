@@ -13,15 +13,18 @@ import javax.swing.ImageIcon;
  *
  * @author jonathan
  */
-public class MenuPrincipal extends javax.swing.JFrame {
+public class MenuPrincipal extends  javax.swing.JFrame {
     Cartelera car=new Cartelera();
-    Cartelera cartelera[]=new Cartelera[20];
+    Cartelera carteleras[]=new Cartelera[20];
+    Empleados empleados[]=new Empleados[20];
     Empleados emp=new Empleados();
     ImageIcon imagen[]= new ImageIcon[12];
     String horarios[][]=car.getHorarios();
      String[] peliculas=car.getPeliculas();
     int con=1;
+    int indice=0;
     Icon icono[];
+    
     /**
      * Creates new form MenuPrincipal
      */
@@ -29,11 +32,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
      initComponents(); 
           //ImageIcon icono = new ImageIcon(imagen.getImage().getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_DEFAULT));
             //jLabe2.setIcon(icono);
-         listarImagenes();
-         listarHorarios();
+        listarImagenes();
+        listarHorarios();
         getHoraActual();
-        jlSala.setText("Sala: "+con);
-        
+        jlSala.setText("Sala: " + con);
+        jlPelicula.setText(peliculas[indice]);
        
     }
     public void listarImagenes(){
@@ -118,6 +121,16 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel2MouseEntered(evt);
+            }
+        });
+        jLabel2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel2KeyPressed(evt);
+            }
+        });
 
         siguiente.setText(">>");
         siguiente.addActionListener(new java.awt.event.ActionListener() {
@@ -143,20 +156,20 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(142, 142, 142)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(53, 53, 53))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(siguiente)))
-                        .addGap(53, 53, 53))
+                                .addGap(45, 45, 45)
+                                .addComponent(siguiente)
+                                .addGap(179, 179, 179))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(76, 76, 76)
                         .addComponent(jlPelicula)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,10 +179,10 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
                 .addComponent(jlPelicula)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(siguiente)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(siguiente))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -177,7 +190,7 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbHorariosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbHorariosItemStateChanged
-        // TODO add your handling code here:
+     // carteleras[indice].setHorario(cbHorarios.getSelectedItem().toString());
     }//GEN-LAST:event_cbHorariosItemStateChanged
 
     private void siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteActionPerformed
@@ -187,10 +200,14 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
         if(con==4)
         {
             con=0;
+            indice=-1;
         }
        
         con++;
+         jlPelicula.setText(peliculas[con-1]);
           jlSala.setText("Sala: "+con);
+        
+      
         jLabel2.setIcon(new ImageIcon(imagen[con].getImage().getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_DEFAULT)));
        // String [][] horarios=car.getHorarios();
       listarHorarios();
@@ -204,16 +221,24 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
         if(con==1)
         {
             con=5;
+            indice=4;
         }
         //String  cinpeli[]=car.getPeliculas();
         con--;
          jlSala.setText("Sala: "+con);
-        
-        
+           jlPelicula.setText(peliculas[(con-1)]);
         
         jLabel2.setIcon(new ImageIcon(imagen[con].getImage().getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_DEFAULT)));
          listarHorarios();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jLabel2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseEntered
+      
+    }//GEN-LAST:event_jLabel2MouseEntered
+
+    private void jLabel2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel2KeyPressed
+       
+    }//GEN-LAST:event_jLabel2KeyPressed
 
     /**
      * @param args the command line arguments

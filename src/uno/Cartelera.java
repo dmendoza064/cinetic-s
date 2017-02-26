@@ -13,7 +13,7 @@ public class Cartelera {
                        {"10:30 PM","09:30 PM","07:10 PM","09:00 PM"}}; 
   
  private int salas []= {1,2,3,4};
- private String peliculas[]= {"1", "2", "3", "4"};
+ private String peliculas[]= {"CINCUENTA SOMBRAS DE GREY", "DOCTOR STRANGE", "ESCUADRÓN SUICIDIA", "MAZE RUNNER"};
  private String pelicula="",horario;
  private int sala=0;
 
