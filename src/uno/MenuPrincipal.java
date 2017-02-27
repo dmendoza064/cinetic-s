@@ -25,6 +25,8 @@ public class MenuPrincipal extends  javax.swing.JFrame {
     int indice=0;
     Icon icono[];
     
+    Boton[][] botones =new Boton[5][7];
+    SeleccionLugar sl;
     /**
      * Creates new form MenuPrincipal
      */
@@ -77,6 +79,7 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
         jPanel1 = new javax.swing.JPanel();
         cbHorarios = new javax.swing.JComboBox();
         jlSala = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         siguiente = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -96,15 +99,23 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
         jlSala.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jlSala.setText("...");
 
+        jButton2.setText("seleccionar lugar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbHorarios, javax.swing.GroupLayout.Alignment.TRAILING, 0, 285, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbHorarios, 0, 285, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jlSala)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -116,7 +127,9 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
                 .addComponent(jlSala)
                 .addGap(142, 142, 142)
                 .addComponent(cbHorarios, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(367, Short.MAX_VALUE))
+                .addGap(33, 33, 33)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -183,7 +196,7 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(siguiente))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 57, Short.MAX_VALUE))
         );
 
         pack();
@@ -240,6 +253,15 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
        
     }//GEN-LAST:event_jLabel2KeyPressed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // davo <------------------------crea un objeto para cada sala
+        //<------------------------------un arreglo tambien es donde se guardan los botones
+        /*      sl=new SeleccionLugar(botones);
+                sl.setVisible(true);   */
+        sl=new SeleccionLugar(botones);
+        sl.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -278,6 +300,7 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cbHorarios;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel jlPelicula;
