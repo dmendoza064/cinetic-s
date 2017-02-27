@@ -7,8 +7,10 @@ package uno;
 import java.awt.Image;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
 import javax.swing.*;
 import javax.swing.ImageIcon;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author jonathan
@@ -24,8 +26,8 @@ public class MenuPrincipal extends  javax.swing.JFrame {
     int con=1;
     int indice=0;
     Icon icono[];
-    
-    Boton[][] botones =new Boton[5][7];
+    LinkedList<ControlAsiento> datos_asiento =new LinkedList<ControlAsiento>();
+    boolean venta=false;
     SeleccionLugar sl;
     /**
      * Creates new form MenuPrincipal
@@ -80,6 +82,8 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
         cbHorarios = new javax.swing.JComboBox();
         jlSala = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        ticket = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         siguiente = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -106,18 +110,38 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
             }
         });
 
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        ticket.setText("ticket");
+        ticket.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ticketActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbHorarios, 0, 285, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jlSala)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbHorarios, 0, 285, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jlSala)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField1)
+                            .addComponent(ticket, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -129,6 +153,10 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
                 .addComponent(cbHorarios, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(64, 64, 64)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(ticket, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -258,10 +286,64 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
         //<------------------------------un arreglo tambien es donde se guardan los botones
         /*      sl=new SeleccionLugar(botones);
                 sl.setVisible(true);   */
-        sl=new SeleccionLugar(botones);
-        sl.setVisible(true);
+        boolean bandera=false;
+        try{
+            Boton[][] botones =new Boton[5][7];
+            for (ControlAsiento datos :datos_asiento ) {
+                if ((con-1)==datos.getSala()&&cbHorarios.getSelectedItem().equals(datos.getHorario())) {
+                sl=new SeleccionLugar(datos.getAsientos_sala());
+                sl.setVisible(true);   
+                datos.setAsientos_sala(sl.regresa());
+                bandera=true;
+                venta=true;
+                }
+            }
+            if (!bandera) {
+                sl=new SeleccionLugar(botones);
+                sl.setVisible(true); 
+                datos_asiento.add(new ControlAsiento(sl.regresa(),(con-1),(String)(cbHorarios.getSelectedItem())));
+                venta=true;
+            }
+            
+        }catch(Exception e){
+        JOptionPane.showMessageDialog(this, "error");
+        }
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void ticketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ticketActionPerformed
+        // TODO add your handling code here:
+        String [][] venta_arreglo;    String cadena="";
+        try{
+        for (ControlAsiento datos :datos_asiento ) {
+                if ((con-1)==datos.getSala()&&cbHorarios.getSelectedItem().equals(datos.getHorario())) {
+                sl=new SeleccionLugar(datos.getAsientos_sala());
+                sl.setVisible(false);
+                venta_arreglo=sl.regresaSeleccionado();
+                
+                    for (String[] venta_arreglo1 : venta_arreglo) {
+                        for (String venta_ticket : venta_arreglo1) {
+                            if(venta_ticket.equals("l"))
+                            cadena+=( venta_ticket+"\t    ");
+                            else
+                            cadena+=( venta_ticket+"   ");    
+                        }
+                        cadena+="\n";
+                    }
+                JOptionPane.showMessageDialog(this, cadena);
+                
+                }
+            }
+        }catch(Exception e){
+            
+        }
+        venta=false;
+    }//GEN-LAST:event_ticketActionPerformed
+    
     /**
      * @param args the command line arguments
      */
@@ -303,8 +385,10 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel jlPelicula;
     private javax.swing.JLabel jlSala;
     private javax.swing.JButton siguiente;
+    private javax.swing.JButton ticket;
     // End of variables declaration//GEN-END:variables
 }

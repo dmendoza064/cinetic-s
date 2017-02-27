@@ -7,6 +7,7 @@ package uno;
 
 import java.awt.Color;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JToggleButton;
 import javax.swing.table.DefaultTableModel;
 
@@ -232,7 +233,31 @@ public class SeleccionLugar extends javax.swing.JFrame {
     public Boton[][] regresa(){
         return botones;
     }
+    public String[][] regresaSeleccionado ()
+    {
+        
+        
+        String[][] seleccionado=new String[5][7];
+        try{
+        for (int i = 0; i < botones.length; i++) 
+        {
+            for (int j = 0; j < botones[i].length; j++) 
+            {
+               
+                seleccionado[i][j]=botones[i][j].getText();
+            }
+            
+        }
+        return seleccionado;
+        }
+        catch(Exception e)
+        {
+            return seleccionado;
+        }
+        
+    }
     private void aceptaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aceptaMouseClicked
+        //JOptionPane.showConfirmDialog(acepta, evt);
         for (Boton[] botone : botones) {
             for (Boton botone1 : botone) {
                 System.out.print(botone1.getText());
@@ -241,6 +266,7 @@ public class SeleccionLugar extends javax.swing.JFrame {
             }
             System.out.println();
         }
+        JOptionPane.showMessageDialog(acepta, "asientos reservados");
         this.setVisible(false);
     }//GEN-LAST:event_aceptaMouseClicked
     
