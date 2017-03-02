@@ -23,12 +23,15 @@ public class MenuPrincipal extends  javax.swing.JFrame {
     ImageIcon imagen[]= new ImageIcon[12];
     String horarios[][]=car.getHorarios();
      String[] peliculas=car.getPeliculas();
+     LogIn l;
     int con=1;
     int indice=0;
     Icon icono[];
     LinkedList<ControlAsiento> datos_asiento =new LinkedList<ControlAsiento>();
     boolean venta=false;
     SeleccionLugar sl;
+    
+    
     /**
      * Creates new form MenuPrincipal
      */
@@ -41,7 +44,14 @@ public class MenuPrincipal extends  javax.swing.JFrame {
         getHoraActual();
         jlSala.setText("Sala: " + con);
         jlPelicula.setText(peliculas[indice]);
+        
+       // this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+        
        
+    }
+    public LinkedList<ControlAsiento> regresaDatos()
+    {
+        return  datos_asiento;
     }
     public void listarImagenes(){
      for (int i = 1; i <= 4; i++) {
@@ -84,6 +94,7 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
         jButton2 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         ticket = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         siguiente = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -123,6 +134,13 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
             }
         });
 
+        jButton3.setText("Cambiar usuario");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -141,7 +159,10 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
                         .addGap(20, 20, 20)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField1)
-                            .addComponent(ticket, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(ticket, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton3)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -157,7 +178,9 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(ticket, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addContainerGap())
         );
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -343,6 +366,15 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
         }
         venta=false;
     }//GEN-LAST:event_ticketActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        
+         l = new LogIn();
+        this.setVisible(false);
+        l.setVisible(true);
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
     
     /**
      * @param args the command line arguments
@@ -371,18 +403,19 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the form 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MenuPrincipal().setVisible(true);
             }
-        });
+        });*/
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cbHorarios;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;

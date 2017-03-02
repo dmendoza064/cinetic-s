@@ -5,6 +5,7 @@
  */
 package uno;
 
+import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,15 +13,24 @@ import javax.swing.JOptionPane;
  * @author Richard
  */
 public class LogIn extends javax.swing.JFrame {
+    boolean valido = false;
     Empleados empleado = new Empleados();
     Empleados empleados[] = new Empleados[20];
     int indice = 0;
     int claves[] = empleado.getEmpleadoClaves();
     String nombres[] = empleado.getEmpleadoNombres();
     int id[] = empleado.getEmpleadoIDs();
+    MenuPrincipal menu;
+    LinkedList<ControlAsiento> lista;
+    
     public LogIn() {
         initComponents();
           listarInfoEmpleado();
+          
+    }
+    public boolean valido1()
+    {
+     return  valido;
     }
 
     public void listarInfoEmpleado (){
@@ -29,6 +39,10 @@ public class LogIn extends javax.swing.JFrame {
       }
          
   }
+    public void paso_paso(){
+        
+        this.setVisible(false);
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -137,33 +151,40 @@ public class LogIn extends javax.swing.JFrame {
 
     private void jbEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEntrarActionPerformed
         try {
+            
             if (indice < 20) {
-                boolean valido = false;
+                
+                System.out.println(tfClave.getText());
                 if (cbId.getSelectedItem().equals(1) && Integer.parseInt(tfClave.getText()) == claves[0]) {
                     empleados[indice] = new Empleados();
                     empleados[indice].setEmpleadoNombre(jlNombre.getText());
                     tfClave.setText(null);
-                    valido = true;
+                    valido=true;
+                    paso_paso();
                 }
                 if (cbId.getSelectedItem().equals(2) && Integer.parseInt(tfClave.getText()) == claves[1]) {
                     empleados[indice] = new Empleados();
                     empleados[indice].setEmpleadoNombre(jlNombre.getText());
                     tfClave.setText(null);
                     valido = true;
+                    paso_paso();
                 }
                 if (cbId.getSelectedItem().equals(3) && Integer.parseInt(tfClave.getText()) == claves[2]) {
                     empleados[indice] = new Empleados();
                     empleados[indice].setEmpleadoNombre(jlNombre.getText());
                     tfClave.setText(null);
                     valido = true;
+                    paso_paso();
                 }
                 if (cbId.getSelectedItem().equals(4) && Integer.parseInt(tfClave.getText()) == claves[3]) {
                     empleados[indice] = new Empleados();
                     empleados[indice].setEmpleadoNombre(jlNombre.getText());
                     tfClave.setText(null);
                     valido = true;
+                    paso_paso();
                 }
                 if (!valido) {
+                    valido=false;
                     JOptionPane.showMessageDialog(this, "Informacion invalida ");
                 }
             }
@@ -209,12 +230,12 @@ public class LogIn extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the form
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new LogIn().setVisible(true);
             }
-        });
+        }); */
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

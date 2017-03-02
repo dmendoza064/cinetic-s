@@ -11,6 +11,7 @@ public class Empleados {
     private int empleadoClaves[] = {1234, 4567, 7891, 4321};
     private int empleadoID = 0, empleadoClave = 0;
     private String empleadoNombre= "";
+    
 
     public int[] getEmpleadoIDs() {
         return empleadoIDs;

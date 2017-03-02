@@ -57,6 +57,10 @@ ArrayList lista=new ArrayList();
         des1 = new javax.swing.JLabel();
         des2 = new javax.swing.JLabel();
         des3 = new javax.swing.JLabel();
+        precio1 = new javax.swing.JLabel();
+        precio2 = new javax.swing.JLabel();
+        precio3 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -86,6 +90,12 @@ ArrayList lista=new ArrayList();
 
         des3.setText("jLabel4");
 
+        precio1.setText("jLabel2");
+
+        precio2.setText("jLabel3");
+
+        precio3.setText("jLabel4");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -97,11 +107,20 @@ ArrayList lista=new ArrayList();
                     .addComponent(imagen2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(imagen3, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(des3)
-                    .addComponent(des2)
-                    .addComponent(des1))
-                .addContainerGap(261, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(des3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(precio3))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(des2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(precio2))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(des1)
+                        .addGap(81, 81, 81)
+                        .addComponent(precio1)))
+                .addContainerGap(146, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,11 +128,13 @@ ArrayList lista=new ArrayList();
                 .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(imagen1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(des1))
+                    .addComponent(des1)
+                    .addComponent(precio1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(imagen2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(des2))
+                    .addComponent(des2)
+                    .addComponent(precio2))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -121,7 +142,9 @@ ArrayList lista=new ArrayList();
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(des3)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(des3)
+                            .addComponent(precio3))
                         .addGap(64, 64, 64))))
         );
 
@@ -138,7 +161,9 @@ ArrayList lista=new ArrayList();
                         .addGap(43, 43, 43)
                         .addComponent(jButton1)
                         .addGap(66, 66, 66)
-                        .addComponent(jLabel1)))
+                        .addComponent(jLabel1)
+                        .addGap(30, 30, 30)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(109, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -148,7 +173,8 @@ ArrayList lista=new ArrayList();
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(45, 45, 45)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -173,6 +199,7 @@ ArrayList lista=new ArrayList();
                jPanel1.setVisible(true);
                imagen1.setIcon(new ImageIcon(inventario[i].getImagen().getImage().getScaledInstance(imagen1.getWidth(), imagen1.getHeight(), Image.SCALE_DEFAULT)));
                des1.setText(inventario[i].getDescripcion());
+               precio1.setText(""+inventario[i].getPrecio());
                 System.out.println(con);
             break;
             }
@@ -185,9 +212,11 @@ ArrayList lista=new ArrayList();
                con++;
                imagen2.setIcon(new ImageIcon(inventario[con].getImagen().getImage().getScaledInstance(imagen1.getWidth(), imagen1.getHeight(), Image.SCALE_DEFAULT)));
                des2.setText(inventario[con].getDescripcion());
+               precio2.setText(""+inventario[con].getPrecio());
                con++;
                imagen3.setIcon(new ImageIcon(inventario[con].getImagen().getImage().getScaledInstance(imagen1.getWidth(), imagen1.getHeight(), Image.SCALE_DEFAULT)));
                des3.setText(inventario[con].getDescripcion());
+               precio3.setText(""+inventario[con].getPrecio());
             }
            
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -223,12 +252,12 @@ ArrayList lista=new ArrayList();
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the form 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MenuDulceria().setVisible(true);
             }
-        });
+        });*/
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -242,5 +271,9 @@ ArrayList lista=new ArrayList();
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel precio1;
+    private javax.swing.JLabel precio2;
+    private javax.swing.JLabel precio3;
     // End of variables declaration//GEN-END:variables
 }

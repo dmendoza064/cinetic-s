@@ -15,7 +15,7 @@ import static javax.swing.Spring.width;
  *
  * @author jonathan
  */
-public class Boton extends JButton implements ActionListener{
+public class Boton extends JButton implements ActionListener {
     
     public Boton(int posx,int posy,int ancho,int alto){
     super.setBounds(posx,posy,ancho,alto);

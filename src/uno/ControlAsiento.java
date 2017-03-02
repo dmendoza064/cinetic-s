@@ -1,11 +1,13 @@
 
 package uno;
 
+import java.io.Serializable;
+
 /**
  *
  * @author jonathan
  */
-public class ControlAsiento {
+public class ControlAsiento{
       private Boton[][] asientos_sala;
       private int sala;
       private String horario;
