@@ -11,6 +11,7 @@ import java.util.LinkedList;
 import javax.swing.*;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
+import java.util.Arrays;
 /**
  *
  * @author jonathan
@@ -22,16 +23,17 @@ public class MenuPrincipal extends  javax.swing.JFrame {
     Empleados emp=new Empleados();
     ImageIcon imagen[]= new ImageIcon[12];
     String horarios[][]=car.getHorarios();
-     String[] peliculas=car.getPeliculas();
-     LogIn l;
+    String[] peliculas=car.getPeliculas();
+    LogIn l;
     int con=1;
     int indice=0;
     Icon icono[];
     LinkedList<ControlAsiento> datos_asiento =new LinkedList<ControlAsiento>();
     boolean venta=false;
     SeleccionLugar sl;
-    
-    
+    String[][] arreglo_ticket;
+    boolean existe_ticket=false;
+    int filas=5,columnas=7;
     /**
      * Creates new form MenuPrincipal
      */
@@ -92,7 +94,6 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
         cbHorarios = new javax.swing.JComboBox();
         jlSala = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
         ticket = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -118,12 +119,6 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
-            }
-        });
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
             }
         });
 
@@ -157,9 +152,7 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1)
-                            .addComponent(ticket, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(ticket, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton3)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -174,11 +167,9 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
                 .addComponent(cbHorarios, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(64, 64, 64)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(116, 116, 116)
                 .addComponent(ticket, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
                 .addComponent(jButton3)
                 .addContainerGap())
         );
@@ -314,11 +305,25 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
             Boton[][] botones =new Boton[5][7];
             for (ControlAsiento datos :datos_asiento ) {
                 if ((con-1)==datos.getSala()&&cbHorarios.getSelectedItem().equals(datos.getHorario())) {
+                    //
+                Boton[][] boto=datos.getAsientos_sala();
+                for (int fila = 0;fila <filas; fila++) {// segunda o despues compra
+                        for (int columna = 0; columna < columnas; columna++) {
+                            if (boto[fila][columna].getText().equals("o")) {
+                                System.out.println("s"); //arreglo_ticket[fila][columna]=("s");
+                            }
+                            else{
+                                System.out.println("l");//arreglo_ticket[fila][columna]=("l");
+                            }
+                        }   
+                    }
+                    //
                 sl=new SeleccionLugar(datos.getAsientos_sala());
                 sl.setVisible(true);   
                 datos.setAsientos_sala(sl.regresa());
                 bandera=true;
                 venta=true;
+                
                 }
             }
             if (!bandera) {
@@ -326,45 +331,54 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
                 sl.setVisible(true); 
                 datos_asiento.add(new ControlAsiento(sl.regresa(),(con-1),(String)(cbHorarios.getSelectedItem())));
                 venta=true;
+                arreglo_ticket=new String[5][7];
             }
             
         }catch(Exception e){
         JOptionPane.showMessageDialog(this, "error");
         }
-        
+        existe_ticket=true;
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
     private void ticketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ticketActionPerformed
-        // TODO add your handling code here:
-        String [][] venta_arreglo;    String cadena="";
-        try{
+        Boton[][] botones;
+        try { 
+//"arreglo_ticket" anterior  y  arreglo ticket presente
+        if (existe_ticket) {
         for (ControlAsiento datos :datos_asiento ) {
                 if ((con-1)==datos.getSala()&&cbHorarios.getSelectedItem().equals(datos.getHorario())) {
-                sl=new SeleccionLugar(datos.getAsientos_sala());
-                sl.setVisible(false);
-                venta_arreglo=sl.regresaSeleccionado();
-                
-                    for (String[] venta_arreglo1 : venta_arreglo) {
-                        for (String venta_ticket : venta_arreglo1) {
-                            if(venta_ticket.equals("l"))
-                            cadena+=( venta_ticket+"\t    ");
-                            else
-                            cadena+=( venta_ticket+"   ");    
-                        }
-                        cadena+="\n";
+                    botones=datos.getAsientos_sala();
+                    
+                    System.err.println("----------------------------------------");
+                    
+                    if (arreglo_ticket[0][0]!=null) {
+                    for (int fila = 0;fila <filas; fila++) {// segunda o despues compra
+                        for (int columna = 0; columna < columnas; columna++) {
+                         if (botones[fila][columna].getText().equals(arreglo_ticket[fila][columna])) {
+                                System.out.print("l");
+                            }
+                            else{
+                                System.out.print("s");
+                            }
+                    } System.out.println("");      
                     }
-                JOptionPane.showMessageDialog(this, cadena);
-                
+                    }
+                    else{//primera compra
+                        for (int fila = 0;fila <filas; fila++) {
+                        for (int columna = 0; columna < columnas; columna++) {
+                            System.out.print(botones[fila][columna].getText()); 
+                    } System.out.println("");      
+                    }
+                    }
                 }
             }
-        }catch(Exception e){
-            
         }
-        venta=false;
+        } catch (Exception e) {
+            System.out.println("error, metodo ticker");
+                }
+        finally {
+        existe_ticket=false;
+    }
     }//GEN-LAST:event_ticketActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -418,7 +432,6 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel jlPelicula;
     private javax.swing.JLabel jlSala;
     private javax.swing.JButton siguiente;

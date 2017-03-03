@@ -32,8 +32,6 @@ public class Boton extends JButton implements ActionListener {
         imagen_seleccionado();
             }    
     }
-    
-    
     public void cambiar_nombre(int x,int y){
             setText("");
         }

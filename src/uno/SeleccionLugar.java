@@ -18,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
 public class SeleccionLugar extends javax.swing.JFrame {
     int filas=5,columnas=7;
     Boton[][] botones;
+    Boton[][] regresaboton;
     //Boton[][] botones=new Boton[5][7];
     public SeleccionLugar(Boton [][] botones) {
         initComponents();
@@ -224,9 +225,24 @@ public class SeleccionLugar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancalaActionPerformed
+        for (Boton[] botone : botones) {
+            for (Boton botone1 : botone) {
+                System.out.print(botone1.getText());
+                if(botone1.getText().equals("s"))
+                botone1.imagen_libre();
+            }
+            System.out.println();
+        }
         this.setVisible(false);
     }//GEN-LAST:event_cancalaActionPerformed
-
+    public Boton[][] regresa_ticket(){
+        try {
+            return regresaboton;
+        } catch (Exception e) {
+            System.out.println("error, no hay compra");
+        return null; 
+        }
+    }
     private void aceptaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_aceptaActionPerformed
@@ -235,18 +251,14 @@ public class SeleccionLugar extends javax.swing.JFrame {
     }
     public String[][] regresaSeleccionado ()
     {
-        
-        
         String[][] seleccionado=new String[5][7];
         try{
         for (int i = 0; i < botones.length; i++) 
         {
             for (int j = 0; j < botones[i].length; j++) 
             {
-               
                 seleccionado[i][j]=botones[i][j].getText();
             }
-            
         }
         return seleccionado;
         }
@@ -258,6 +270,8 @@ public class SeleccionLugar extends javax.swing.JFrame {
     }
     private void aceptaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aceptaMouseClicked
         //JOptionPane.showConfirmDialog(acepta, evt);
+        regresaboton=botones;
+        //
         for (Boton[] botone : botones) {
             for (Boton botone1 : botone) {
                 System.out.print(botone1.getText());
@@ -266,6 +280,7 @@ public class SeleccionLugar extends javax.swing.JFrame {
             }
             System.out.println();
         }
+        System.out.println("\n");
         JOptionPane.showMessageDialog(acepta, "asientos reservados");
         this.setVisible(false);
     }//GEN-LAST:event_aceptaMouseClicked
