@@ -310,10 +310,10 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
                 for (int fila = 0;fila <filas; fila++) {// segunda o despues compra
                         for (int columna = 0; columna < columnas; columna++) {
                             if (boto[fila][columna].getText().equals("o")) {
-                                System.out.println("s"); //arreglo_ticket[fila][columna]=("s");
+                                arreglo_ticket[fila][columna]="o"; //arreglo_ticket[fila][columna]=("s");
                             }
                             else{
-                                System.out.println("l");//arreglo_ticket[fila][columna]=("l");
+                                arreglo_ticket[fila][columna]="l";//arreglo_ticket[fila][columna]=("l");
                             }
                         }   
                     }
