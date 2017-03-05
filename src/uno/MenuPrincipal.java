@@ -17,8 +17,8 @@ import java.util.Arrays;
  * @author jonathan
  */
 public class MenuPrincipal extends  javax.swing.JFrame {
-    Cartelera car=new Cartelera();
-    Cartelera carteleras[]=new Cartelera[20];
+    Cartelera car=new Cartelera(); 
+    Cartelera carteleras[]=new Cartelera[20]; 
     Empleados empleados[]=new Empleados[20];
     Empleados emp=new Empleados();
     ImageIcon imagen[]= new ImageIcon[12];

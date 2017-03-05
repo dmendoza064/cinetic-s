@@ -16,6 +16,11 @@ public class Cartelera {
  private String peliculas[]= {"CINCUENTA SOMBRAS DE GREY", "DOCTOR STRANGE", "ESCUADRÓN SUICIDIA", "MAZE RUNNER"};
  private String pelicula="",horario;
  private int sala=0;
+   private Cartelera []carteleras;
+   private  int indice;
+  
+ 
+ 
 
     public String[][] getHorarios() {
         return horarios;
@@ -51,9 +56,37 @@ public class Cartelera {
         this.pelicula = pelicula;
     }
 
-
-
     public void setSala(int sala) {
         this.sala = sala;
     }
+    
+    private void setNuevo (String horario,String pelicula,int sala){
+    carteleras[indice].setHorario(horario);
+    carteleras[indice].setPelicula(pelicula);
+    carteleras[indice].setSala(sala);
+    
+    }
+ 
+    
+   
+   
+  /* private void elemento_mas (Cartelera[]actual){
+   n_elementos=actual.length;
+   carteleras=new Cartelera[n_elementos+1];
+   for (int i=0;i<n_elementos;i++){
+   carteleras[i]=actual[i];
+   }
+   n_elementos++;
+   }
+   private void elemento_menos (Cartelera[]actual){
+   if (actual.length==0)return;
+   int k=0;
+   n_elementos=actual.length;
+   carteleras=new Cartelera[n_elementos-1];
+    for (int i=0;i<n_elementos;i++){
+    if (actual[i]!=null){
+    carteleras[k++]=actual[i];
+    }
+     }
+}   */
 }

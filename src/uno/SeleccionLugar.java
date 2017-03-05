@@ -19,7 +19,7 @@ public class SeleccionLugar extends javax.swing.JFrame {
     int filas=5,columnas=7;
     Boton[][] botones;
     Boton[][] regresaboton;
-    
+    Cartelera c=new Cartelera ();
     
     //Boton[][] botones=new Boton[5][7];
     public SeleccionLugar(Boton [][] botones) {
@@ -29,6 +29,7 @@ public class SeleccionLugar extends javax.swing.JFrame {
         agregar_despues();    
         }else
         agrega_primera();
+        
         
     }
        public void generarTicket (int c,int f){
@@ -109,29 +110,29 @@ public class SeleccionLugar extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 102));
 
-        jLabel1.setText("A");
+        jLabel1.setText("1");
 
-        jLabel2.setText("B");
+        jLabel2.setText("2");
 
-        jLabel3.setText("C");
+        jLabel3.setText("3");
 
-        jLabel4.setText("D");
+        jLabel4.setText("4");
 
-        jLabel5.setText("E");
+        jLabel5.setText("5");
 
-        jLabel6.setText("F");
+        jLabel6.setText("6");
 
-        jLabel7.setText("G");
+        jLabel7.setText("7");
 
-        jLabel8.setText("1");
+        jLabel8.setText("A");
 
-        jLabel9.setText("2");
+        jLabel9.setText("B");
 
-        jLabel10.setText("3");
+        jLabel10.setText("C");
 
-        jLabel11.setText("4");
+        jLabel11.setText("D");
 
-        jLabel12.setText("5");
+        jLabel12.setText("E");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
