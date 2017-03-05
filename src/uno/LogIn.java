@@ -5,7 +5,9 @@
  */
 package uno;
 
+import java.awt.Image;
 import java.util.LinkedList;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,10 +24,13 @@ public class LogIn extends javax.swing.JFrame {
     int id[] = empleado.getEmpleadoIDs();
     MenuPrincipal menu;
     LinkedList<ControlAsiento> lista;
+    ImageIcon imagen ;
     
     public LogIn() {
         initComponents();
           listarInfoEmpleado();
+          imagen = new ImageIcon(getClass().getResource(("logo cine.jpg")));
+          fondo.setIcon(new ImageIcon(imagen.getImage().getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_DEFAULT)));
           
     }
     public boolean valido1()
@@ -55,8 +60,13 @@ public class LogIn extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         cbId = new javax.swing.JComboBox();
+        fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(360, 300));
+        setMinimumSize(new java.awt.Dimension(360, 300));
+        setPreferredSize(new java.awt.Dimension(360, 300));
+        getContentPane().setLayout(null);
 
         jbEntrar.setText("Entrar");
         jbEntrar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -69,78 +79,48 @@ public class LogIn extends javax.swing.JFrame {
                 jbEntrarActionPerformed(evt);
             }
         });
+        getContentPane().add(jbEntrar);
+        jbEntrar.setBounds(101, 209, 131, 23);
 
         tfClave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfClaveActionPerformed(evt);
             }
         });
+        getContentPane().add(tfClave);
+        tfClave.setBounds(160, 160, 69, 20);
 
+        jlNombre.setForeground(new java.awt.Color(255, 255, 255));
         jlNombre.setText("...");
+        getContentPane().add(jlNombre);
+        jlNombre.setBounds(140, 120, 80, 14);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("Empleado:");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(24, 19, 58, 14);
 
         jLabel3.setText("ID:");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(50, 80, 40, 14);
 
         jLabel4.setText("Nombre:");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(50, 120, 60, 14);
 
         jLabel5.setText("Clave:");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(50, 160, 50, 14);
 
         cbId.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbIdItemStateChanged(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(101, 101, 101)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(47, 47, 47)
-                                .addComponent(tfClave, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(45, 45, 45)
-                                .addComponent(cbId, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jbEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(28, 28, 28)
-                                .addComponent(jlNombre))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jLabel2)))
-                .addContainerGap(152, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel2)
-                .addGap(43, 43, 43)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jlNombre))
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(31, 31, 31)
-                .addComponent(jbEntrar)
-                .addContainerGap(68, Short.MAX_VALUE))
-        );
+        getContentPane().add(cbId);
+        cbId.setBounds(161, 76, 53, 20);
+        getContentPane().add(fondo);
+        fondo.setBounds(4, 0, 360, 300);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -240,6 +220,7 @@ public class LogIn extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cbId;
+    private javax.swing.JLabel fondo;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

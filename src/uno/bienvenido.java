@@ -6,6 +6,11 @@
 
 package uno;
 
+import com.sun.awt.AWTUtilities;
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author David
@@ -15,6 +20,8 @@ public class bienvenido extends javax.swing.JFrame {
     MenuPrincipal taquilla;
     MenuDulceria dulceria;
     boolean vandera = false;
+    ImageIcon imagen ;
+    ImageIcon imagen1 ;
     
     /**
      * Creates new form bienvenido
@@ -26,7 +33,13 @@ public class bienvenido extends javax.swing.JFrame {
             jButton2.setVisible(false);
          taquilla= new MenuPrincipal();
          dulceria = new MenuDulceria();
-        
+         imagen = new ImageIcon(getClass().getResource(("fondo.jpg")));
+          fondo.setIcon(new ImageIcon(imagen.getImage().getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_DEFAULT)));
+          //jPanel1.setIcon(new ImageIcon(imagen.getImage().getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_DEFAULT)));
+        imagen1 = new ImageIcon(getClass().getResource(("nada.png")));
+          fondo1.setIcon(new ImageIcon(imagen.getImage().getScaledInstance(fondo1.getWidth(), fondo1.getHeight(), Image.SCALE_DEFAULT)));
+          
+          
     }
 
     /**
@@ -41,15 +54,23 @@ public class bienvenido extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        fondo1 = new javax.swing.JLabel();
         Sesion = new javax.swing.JButton();
+        fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(490, 370));
+        setMinimumSize(new java.awt.Dimension(490, 370));
+        setPreferredSize(new java.awt.Dimension(490, 370));
+        getContentPane().setLayout(null);
 
+        jPanel1.setMaximumSize(new java.awt.Dimension(480, 230));
         jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jPanel1MouseEntered(evt);
             }
         });
+        jPanel1.setLayout(null);
 
         jButton1.setText("Dulceria");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -57,6 +78,8 @@ public class bienvenido extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        jPanel1.add(jButton1);
+        jButton1.setBounds(10, 11, 88, 58);
 
         jButton2.setText("taquella");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -64,27 +87,13 @@ public class bienvenido extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
+        jPanel1.add(jButton2);
+        jButton2.setBounds(368, 14, 84, 52);
+        jPanel1.add(fondo1);
+        fondo1.setBounds(4, 4, 480, 230);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 270, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(231, Short.MAX_VALUE))
-        );
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(0, 0, 480, 230);
 
         Sesion.setText("Usuario");
         Sesion.addActionListener(new java.awt.event.ActionListener() {
@@ -92,24 +101,10 @@ public class bienvenido extends javax.swing.JFrame {
                 SesionActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Sesion)
-                .addGap(18, 18, 18))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                .addComponent(Sesion))
-        );
+        getContentPane().add(Sesion);
+        Sesion.setBounds(360, 300, 69, 23);
+        getContentPane().add(fondo);
+        fondo.setBounds(0, -6, 490, 370);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -198,6 +193,8 @@ public class bienvenido extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Sesion;
+    private javax.swing.JLabel fondo;
+    private javax.swing.JLabel fondo1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
