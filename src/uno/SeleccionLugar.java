@@ -19,6 +19,8 @@ public class SeleccionLugar extends javax.swing.JFrame {
     int filas=5,columnas=7;
     Boton[][] botones;
     Boton[][] regresaboton;
+    
+    
     //Boton[][] botones=new Boton[5][7];
     public SeleccionLugar(Boton [][] botones) {
         initComponents();
@@ -28,6 +30,33 @@ public class SeleccionLugar extends javax.swing.JFrame {
         }else
         agrega_primera();
         
+    }
+       public void generarTicket (int c,int f){
+      String seccion= seccion(f);
+      int asiento=(c%7)+1;
+      taTicket.append("Cine-Tics \n"
+              +seccion+asiento
+              +"\nPrecio: $35.00"+"\n--------\n");
+    }
+    
+    public String seccion (int s){
+    String seccion="";
+        if (s == 0) {
+            seccion = "A";
+        }
+        if (s == 1) {
+            seccion = "B";
+        }
+        if (s == 2) {
+            seccion = "C";
+        }
+        if (s == 3) {
+            seccion = "D";
+        }
+        if (s == 4) {
+            seccion = "E";
+        }
+    return seccion;
     }
     public void agrega_primera(){
         for (int fila = 0;fila <filas; fila++) {
@@ -70,6 +99,11 @@ public class SeleccionLugar extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         acepta = new javax.swing.JButton();
         cancala = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        taTicket = new javax.swing.JTextArea();
+        jButton1 = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
+        jlTotal = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -202,6 +236,21 @@ public class SeleccionLugar extends javax.swing.JFrame {
                 .addGap(0, 12, Short.MAX_VALUE))
         );
 
+        taTicket.setColumns(20);
+        taTicket.setRows(5);
+        jScrollPane1.setViewportView(taTicket);
+
+        jButton1.setText("Cerrar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel13.setText("Total:");
+
+        jlTotal.setText("...");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -210,14 +259,39 @@ public class SeleccionLugar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jlTotal)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(69, 69, 69))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(81, 81, 81)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel13)
+                            .addComponent(jlTotal))
+                        .addGap(38, 38, 38)
+                        .addComponent(jButton1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -272,18 +346,31 @@ public class SeleccionLugar extends javax.swing.JFrame {
         //JOptionPane.showConfirmDialog(acepta, evt);
         regresaboton=botones;
         //
+        int total=0;
+       int fila=-1;
+       int columna=-1;
         for (Boton[] botone : botones) {
+          fila++;
             for (Boton botone1 : botone) {
+            columna++;
                 System.out.print(botone1.getText());
-                if(botone1.getText().equals("s"))
+                if(botone1.getText().equals("s")){
+                generarTicket(columna,fila);
+                 total+=35;
                 botone1.imagen_ocupado();
+                }
             }
             System.out.println();
         }
+        jlTotal.setText("$"+total+".00");
         System.out.println("\n");
-        JOptionPane.showMessageDialog(acepta, "asientos reservados");
-        this.setVisible(false);
+        //JOptionPane.showMessageDialog(acepta, "asientos reservados");
+        //this.setVisible(false);
     }//GEN-LAST:event_aceptaMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -320,10 +407,12 @@ public class SeleccionLugar extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton acepta;
     private javax.swing.JButton cancala;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -334,5 +423,8 @@ public class SeleccionLugar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel jlTotal;
+    private javax.swing.JTextArea taTicket;
     // End of variables declaration//GEN-END:variables
 }
