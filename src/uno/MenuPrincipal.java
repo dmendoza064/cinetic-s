@@ -37,6 +37,7 @@ public class MenuPrincipal extends  javax.swing.JFrame {
     String pelicula;
     String horario;
     int sala; 
+    boolean activar=true;
     /**
      * Creates new form MenuPrincipal
      */
@@ -51,8 +52,13 @@ public class MenuPrincipal extends  javax.swing.JFrame {
         jlPelicula.setText(peliculas[indice]);
         
        // this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
-        
-       
+    }
+    public void activar_desactivar(boolean sn){
+        cbHorarios.setVisible(sn);
+        jButton2.setVisible(sn);
+        jButton3.setVisible(sn);
+        jButton1.setVisible(sn);
+        siguiente.setVisible(sn);
     }
     public void setPelicula (String p){
     pelicula=p;
@@ -179,7 +185,7 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
             }
         });
 
-        jButton3.setText("Cambiar usuario");
+        jButton3.setText("salir");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -192,7 +198,7 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -200,9 +206,7 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jlSala)
                                 .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton3)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -215,7 +219,7 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
                 .addGap(33, 33, 33)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -441,7 +445,7 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
                 datos.setAsientos_sala(sl.regresa());
                 bandera=true;
                 venta=true;
-                
+                break;
                 }
             }
             if (!bandera) {
@@ -450,12 +454,14 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
                 datos_asiento.add(new ControlAsiento(sl.regresa(),(con-1),(String)(cbHorarios.getSelectedItem())));
                 venta=true;
                 arreglo_ticket=new String[5][7];
+                arreglo_ticket[0][0]=null;
             }
             
         }catch(Exception e){
         JOptionPane.showMessageDialog(this, "error");
         }
         existe_ticket=true;
+        activar_desactivar(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void ticketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ticketActionPerformed
@@ -490,9 +496,15 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
                     }
                     else{//primera compra
                         for (int fila = 0;fila <filas; fila++) {
-                        for (int columna = 0; columna < columnas; columna++) {
-                            System.out.print(botones[fila][columna].getText()); 
-                    } System.out.println("");      
+                            for (int columna = 0; columna < columnas; columna++) {
+                                if(botones[fila][columna].getText().equals("o")){
+                                    System.out.print(botones[fila][columna].getText()+"     --------"); 
+                                    generarTicket(columna,fila);
+                                    total+=35;   
+                                }else{
+                                 
+                                }
+                    } System.out.println("primera");      
                     }
                     }
                 }
@@ -504,16 +516,13 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
         finally {
         existe_ticket=false;
         jlTotal.setText("$"+total+".00");
+          activar_desactivar(true);
     }
     }//GEN-LAST:event_ticketActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        
-         l = new LogIn();
         this.setVisible(false);
-        l.setVisible(true);
-        
     }//GEN-LAST:event_jButton3ActionPerformed
     
     /**
