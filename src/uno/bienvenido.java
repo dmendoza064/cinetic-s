@@ -8,6 +8,7 @@ package uno;
 
 import com.sun.awt.AWTUtilities;
 import java.awt.Image;
+import java.util.LinkedList;
 
 import javax.swing.ImageIcon;
 
@@ -18,11 +19,11 @@ import javax.swing.ImageIcon;
 public class bienvenido extends javax.swing.JFrame {
     LogIn l ;
     MenuPrincipal taquilla;
-    MenuDulceria dulceria;
+    //MenuDulceria dulceria;        //------------------------------------------
     boolean vandera = false;
     ImageIcon imagen ;
     ImageIcon imagen1 ;
-    
+    LinkedList<MenuDulceria> lista_dulce;
     /**
      * Creates new form bienvenido
      */
@@ -32,14 +33,14 @@ public class bienvenido extends javax.swing.JFrame {
         jButton1.setVisible(false);
             jButton2.setVisible(false);
          taquilla= new MenuPrincipal();
-         dulceria = new MenuDulceria();
+         //dulceria = new MenuDulceria(); //------------------------------------
          imagen = new ImageIcon(getClass().getResource(("fondo.jpg")));
           fondo.setIcon(new ImageIcon(imagen.getImage().getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_DEFAULT)));
           //jPanel1.setIcon(new ImageIcon(imagen.getImage().getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_DEFAULT)));
         imagen1 = new ImageIcon(getClass().getResource(("nada.png")));
           fondo1.setIcon(new ImageIcon(imagen.getImage().getScaledInstance(fondo1.getWidth(), fondo1.getHeight(), Image.SCALE_DEFAULT)));
           
-          
+          lista_dulce=new LinkedList<>();
     }
 
     /**
@@ -152,8 +153,9 @@ public class bienvenido extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        MenuDulceria dulceria=new MenuDulceria();
         dulceria.setVisible(true);
+        lista_dulce.add(dulceria);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
