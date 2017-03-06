@@ -288,9 +288,23 @@ boolean encontrado=false;
                des3.setText(inventario[con].getDescripcion());
                precio3.setText(""+inventario[con].getPrecio());
             }
-           
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    public double regresa_total(){
+        double total=0;
+        try{
+               for (int i = 0; i < modelo.getRowCount(); i++) {
+                   for (int j = 0; j < modelo.getColumnCount(); j++) { 
+                   }
+                   String precio=modelo.getValueAt(i, 2).toString();System.out.println(precio);
+                   String cantidad=modelo.getValueAt(i, 1).toString();System.out.println(cantidad);
+                   total+=Double.parseDouble(precio)*Double.parseDouble(cantidad);
+            }
+               total=Math.round(total*100)/100;
+        }catch(Exception e){ System.out.println("error");}
+        finally{
+        }
+        return total;
+    } 
     private void imagen2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imagen2ActionPerformed
         // TODO add your handling code here:
         
