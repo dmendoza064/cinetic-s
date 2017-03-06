@@ -22,6 +22,7 @@ public class bienvenido extends javax.swing.JFrame {
     boolean vandera = false;
     ImageIcon imagen ;
     ImageIcon imagen1 ;
+    ImageIcon imagen2 ;
     
     /**
      * Creates new form bienvenido
@@ -30,15 +31,18 @@ public class bienvenido extends javax.swing.JFrame {
         initComponents();
         //jPanel1.setVisible(false);
         jButton1.setVisible(false);
-            jButton2.setVisible(false);
+            taqui.setVisible(false);
          taquilla= new MenuPrincipal();
          dulceria = new MenuDulceria();
          imagen = new ImageIcon(getClass().getResource(("fondo.jpg")));
           fondo.setIcon(new ImageIcon(imagen.getImage().getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_DEFAULT)));
-          //jPanel1.setIcon(new ImageIcon(imagen.getImage().getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_DEFAULT)));
-        imagen1 = new ImageIcon(getClass().getResource(("nada.png")));
-          fondo1.setIcon(new ImageIcon(imagen.getImage().getScaledInstance(fondo1.getWidth(), fondo1.getHeight(), Image.SCALE_DEFAULT)));
           
+          fondo1.setIcon(new ImageIcon(imagen.getImage().getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_DEFAULT)));
+          imagen1 = new ImageIcon(getClass().getResource(("user.jpg")));
+          Sesion.setIcon(new ImageIcon(imagen1.getImage().getScaledInstance(Sesion.getWidth(), Sesion.getHeight(), Image.SCALE_DEFAULT)));
+          
+          imagen2 = new ImageIcon(getClass().getResource(("TAQUILLA.png")));
+          taqui.setIcon(new ImageIcon(imagen2.getImage().getScaledInstance(taqui.getWidth(), taqui.getHeight(), Image.SCALE_DEFAULT)));
           
     }
 
@@ -53,7 +57,7 @@ public class bienvenido extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        taqui = new javax.swing.JButton();
         fondo1 = new javax.swing.JLabel();
         Sesion = new javax.swing.JButton();
         fondo = new javax.swing.JLabel();
@@ -79,16 +83,16 @@ public class bienvenido extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(10, 11, 88, 58);
+        jButton1.setBounds(10, 80, 200, 100);
 
-        jButton2.setText("taquella");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        taqui.setText("taquella");
+        taqui.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                taquiActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2);
-        jButton2.setBounds(368, 14, 84, 52);
+        jPanel1.add(taqui);
+        taqui.setBounds(230, 80, 230, 110);
         jPanel1.add(fondo1);
         fondo1.setBounds(4, 4, 480, 230);
 
@@ -102,7 +106,7 @@ public class bienvenido extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Sesion);
-        Sesion.setBounds(360, 300, 69, 23);
+        Sesion.setBounds(160, 240, 140, 110);
         getContentPane().add(fondo);
         fondo.setBounds(0, -6, 490, 370);
 
@@ -118,12 +122,12 @@ public class bienvenido extends javax.swing.JFrame {
         {
             System.out.println("verdadero");
             jButton1.setVisible(true);
-            jButton2.setVisible(true);
+            taqui.setVisible(true);
         }
         else
         {
          jButton1.setVisible(false);
-            jButton2.setVisible(false);   
+            taqui.setVisible(false);   
         }
     }//GEN-LAST:event_SesionActionPerformed
 
@@ -133,23 +137,23 @@ public class bienvenido extends javax.swing.JFrame {
         {
             System.out.println("verdadero");
             jButton1.setVisible(true);
-            jButton2.setVisible(true);
+            taqui.setVisible(true);
         }
         else
         {
          jButton1.setVisible(false);
-            jButton2.setVisible(false);   
+            taqui.setVisible(false);   
         }
        }catch(Exception e){
            
        }
     }//GEN-LAST:event_jPanel1MouseEntered
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void taquiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_taquiActionPerformed
         // TODO add your handling code here:
         
         taquilla.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_taquiActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -196,7 +200,7 @@ public class bienvenido extends javax.swing.JFrame {
     private javax.swing.JLabel fondo;
     private javax.swing.JLabel fondo1;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton taqui;
     // End of variables declaration//GEN-END:variables
 }
