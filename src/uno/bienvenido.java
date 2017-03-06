@@ -23,6 +23,7 @@ public class bienvenido extends javax.swing.JFrame {
     ImageIcon imagen ;
     ImageIcon imagen1 ;
     ImageIcon imagen2 ;
+    ImageIcon imagen3 ;
     
     /**
      * Creates new form bienvenido
@@ -30,7 +31,7 @@ public class bienvenido extends javax.swing.JFrame {
     public bienvenido() {
         initComponents();
         //jPanel1.setVisible(false);
-        jButton1.setVisible(false);
+        dulce.setVisible(false);
             taqui.setVisible(false);
          taquilla= new MenuPrincipal();
          dulceria = new MenuDulceria();
@@ -43,6 +44,8 @@ public class bienvenido extends javax.swing.JFrame {
           
           imagen2 = new ImageIcon(getClass().getResource(("TAQUILLA.png")));
           taqui.setIcon(new ImageIcon(imagen2.getImage().getScaledInstance(taqui.getWidth(), taqui.getHeight(), Image.SCALE_DEFAULT)));
+          imagen3 = new ImageIcon(getClass().getResource(("dulce3.png")));
+          dulce.setIcon(new ImageIcon(imagen3.getImage().getScaledInstance(dulce.getWidth(), dulce.getHeight(), Image.SCALE_DEFAULT)));
           
     }
 
@@ -56,7 +59,7 @@ public class bienvenido extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        dulce = new javax.swing.JButton();
         taqui = new javax.swing.JButton();
         fondo1 = new javax.swing.JLabel();
         Sesion = new javax.swing.JButton();
@@ -76,14 +79,14 @@ public class bienvenido extends javax.swing.JFrame {
         });
         jPanel1.setLayout(null);
 
-        jButton1.setText("Dulceria");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        dulce.setText("Dulceria");
+        dulce.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                dulceActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1);
-        jButton1.setBounds(10, 80, 200, 100);
+        jPanel1.add(dulce);
+        dulce.setBounds(10, 80, 200, 100);
 
         taqui.setText("taquella");
         taqui.addActionListener(new java.awt.event.ActionListener() {
@@ -108,7 +111,7 @@ public class bienvenido extends javax.swing.JFrame {
         getContentPane().add(Sesion);
         Sesion.setBounds(160, 240, 140, 110);
         getContentPane().add(fondo);
-        fondo.setBounds(0, -6, 490, 370);
+        fondo.setBounds(0, -6, 560, 420);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -121,12 +124,12 @@ public class bienvenido extends javax.swing.JFrame {
         if(vandera =l.valido1())
         {
             System.out.println("verdadero");
-            jButton1.setVisible(true);
+            dulce.setVisible(true);
             taqui.setVisible(true);
         }
         else
         {
-         jButton1.setVisible(false);
+         dulce.setVisible(false);
             taqui.setVisible(false);   
         }
     }//GEN-LAST:event_SesionActionPerformed
@@ -136,12 +139,12 @@ public class bienvenido extends javax.swing.JFrame {
         if(vandera =l.valido1())
         {
             System.out.println("verdadero");
-            jButton1.setVisible(true);
+            dulce.setVisible(true);
             taqui.setVisible(true);
         }
         else
         {
-         jButton1.setVisible(false);
+         dulce.setVisible(false);
             taqui.setVisible(false);   
         }
        }catch(Exception e){
@@ -155,10 +158,10 @@ public class bienvenido extends javax.swing.JFrame {
         taquilla.setVisible(true);
     }//GEN-LAST:event_taquiActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void dulceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dulceActionPerformed
         // TODO add your handling code here:
         dulceria.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_dulceActionPerformed
 
     /**
      * @param args the command line arguments
@@ -197,9 +200,9 @@ public class bienvenido extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Sesion;
+    private javax.swing.JButton dulce;
     private javax.swing.JLabel fondo;
     private javax.swing.JLabel fondo1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton taqui;
     // End of variables declaration//GEN-END:variables
