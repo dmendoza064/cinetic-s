@@ -20,9 +20,17 @@ public class SeleccionLugar extends javax.swing.JFrame {
     Boton[][] botones;
     Boton[][] regresaboton;
     Cartelera c=new Cartelera ();
+    String h;
+    String p;
+    
+    MenuPrincipal mp=new MenuPrincipal();
+    
     
     //Boton[][] botones=new Boton[5][7];
     public SeleccionLugar(Boton [][] botones) {
+       
+        this.h=mp.getHorario();
+        this.p=mp.getPelicula();
         initComponents();
         this.botones=botones;
         if (botones[1][1]!=null) {
@@ -36,6 +44,9 @@ public class SeleccionLugar extends javax.swing.JFrame {
       String seccion= seccion(f);
       int asiento=(c%7)+1;
       taTicket.append("Cine-Tics \n"
+              +"\nSala: "
+              +"\n"+h
+              +"\n"+p
               +seccion+asiento
               +"\nPrecio: $35.00"+"\n--------\n");
     }
