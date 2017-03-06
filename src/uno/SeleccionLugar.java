@@ -22,33 +22,28 @@ public class SeleccionLugar extends javax.swing.JFrame {
     Cartelera c=new Cartelera ();
     String h;
     String p;
-    
+    int s;
     MenuPrincipal mp=new MenuPrincipal();
-    
+  
     
     //Boton[][] botones=new Boton[5][7];
     public SeleccionLugar(Boton [][] botones) {
-       
-        this.h=mp.getHorario();
-        this.p=mp.getPelicula();
         initComponents();
         this.botones=botones;
         if (botones[1][1]!=null) {
         agregar_despues();    
         }else
         agrega_primera();
+
         
         
     }
+  
        public void generarTicket (int c,int f){
       String seccion= seccion(f);
       int asiento=(c%7)+1;
-      taTicket.append("Cine-Tics \n"
-              +"\nSala: "
-              +"\n"+h
-              +"\n"+p
-              +seccion+asiento
-              +"\nPrecio: $35.00"+"\n--------\n");
+  taTicket.append("Asiento: "+seccion+"-"+asiento
+              +"\nPrecio: $35.00"+"\n--------------------------------------------------\n");
     }
     
     public String seccion (int s){
@@ -276,16 +271,16 @@ public class SeleccionLugar extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
                         .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(69, 69, 69))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jlTotal)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addGap(69, 69, 69))))
+                        .addContainerGap(151, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

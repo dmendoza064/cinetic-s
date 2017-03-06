@@ -50,6 +50,7 @@ public class MenuPrincipal extends  javax.swing.JFrame {
         getHoraActual();
         jlSala.setText("Sala: " + con);
         jlPelicula.setText(peliculas[indice]);
+        jpTicket.setVisible(false);
         
        // this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
     }
@@ -118,10 +119,10 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
       int asiento=(c%7)+1;
       taTicket.append("Cine-Tics \n"
               +"\nSala: "+con
+              +"\nAsiento: "+seccion+"-"+asiento
               +"\n"+cbHorarios.getSelectedItem().toString()
               +"\n"+jlPelicula.getText()
-              +"\n"+seccion+asiento
-              +"\nPrecio: $35.00"+"\n--------\n");
+              +"\nPrecio: $35.00"+"\n--------------------------------------------------\n");
     }
     
     public String seccion (int s){
@@ -156,13 +157,14 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
         siguiente = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jlPelicula = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        jpTicket = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         taTicket = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         ticket = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jlTotal = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -252,6 +254,8 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
 
         jlPelicula.setText("...");
 
+        jpTicket.setBackground(new java.awt.Color(255, 255, 255));
+
         taTicket.setColumns(20);
         taTicket.setRows(5);
         jScrollPane1.setViewportView(taTicket);
@@ -268,47 +272,58 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
 
         jLabel3.setText("Total:");
 
-        jlTotal.setText("jLabel4");
+        jlTotal.setText("...");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+        jButton4.setText("Nuevo");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jpTicketLayout = new javax.swing.GroupLayout(jpTicket);
+        jpTicket.setLayout(jpTicketLayout);
+        jpTicketLayout.setHorizontalGroup(
+            jpTicketLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpTicketLayout.createSequentialGroup()
+                .addGroup(jpTicketLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpTicketLayout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addComponent(jLabel1))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(jpTicketLayout.createSequentialGroup()
                         .addGap(32, 32, 32)
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
                         .addComponent(jlTotal)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(jpTicketLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jpTicketLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpTicketLayout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
                         .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpTicketLayout.createSequentialGroup()
                         .addComponent(ticket, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(21, 21, 21))))
+                        .addGap(21, 21, 21))
+                    .addGroup(jpTicketLayout.createSequentialGroup()
+                        .addComponent(jButton4)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+        jpTicketLayout.setVerticalGroup(
+            jpTicketLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpTicketLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(5, 5, 5)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jpTicketLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jlTotal))
                 .addGap(20, 20, 20)
                 .addComponent(ticket, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton4))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -328,7 +343,7 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(jpTicket, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGap(155, 155, 155)
@@ -345,13 +360,13 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
                 .addComponent(jlPelicula)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jpTicket, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(siguiente))
-                .addGap(0, 52, Short.MAX_VALUE))
+                .addGap(0, 47, Short.MAX_VALUE))
         );
 
         pack();
@@ -415,7 +430,8 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
                 sl.setVisible(true);   */
         taTicket.setText(null);
         jlTotal.setText(null);
-        
+        jpTicket.setVisible(true);
+        taTicket.setEditable(false);
         System.out.println(cbHorarios.getSelectedItem().toString());
         System.out.println(con);
         System.out.println(jlPelicula.getText());
@@ -524,6 +540,12 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
         // TODO add your handling code here:
         this.setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+         taTicket.setText(null);
+        jlTotal.setText(null);
+        jpTicket.setVisible(false);
+    }//GEN-LAST:event_jButton4ActionPerformed
     
     /**
      * @param args the command line arguments
@@ -565,15 +587,16 @@ SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel jlPelicula;
     private javax.swing.JLabel jlSala;
     private javax.swing.JLabel jlTotal;
+    private javax.swing.JPanel jpTicket;
     private javax.swing.JButton siguiente;
     private javax.swing.JTextArea taTicket;
     private javax.swing.JButton ticket;

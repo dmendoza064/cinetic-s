@@ -17,6 +17,7 @@ public class ControlAsiento{
         this.sala = sala;
         this.horario = horario;
     }
+ 
     
 
     public Boton[][] getAsientos_sala() {
