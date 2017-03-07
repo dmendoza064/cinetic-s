@@ -24,14 +24,17 @@ public class bienvenido extends javax.swing.JFrame {
     ImageIcon imagen ;
     ImageIcon imagen1 ;
     LinkedList<MenuDulceria> lista_dulce;
+    ImageIcon imagen2 ;
+    ImageIcon imagen3 ;
+    
     /**
      * Creates new form bienvenido
      */
     public bienvenido() {
         initComponents();
         //jPanel1.setVisible(false);
-        jButton1.setVisible(false);
-            jButton2.setVisible(false);
+        dulce.setVisible(false);
+            taqui.setVisible(false);
          taquilla= new MenuPrincipal();
          //dulceria = new MenuDulceria(); //------------------------------------
          imagen = new ImageIcon(getClass().getResource(("fondo.jpg")));
@@ -41,6 +44,14 @@ public class bienvenido extends javax.swing.JFrame {
           fondo1.setIcon(new ImageIcon(imagen.getImage().getScaledInstance(fondo1.getWidth(), fondo1.getHeight(), Image.SCALE_DEFAULT)));
           
           lista_dulce=new LinkedList<>();
+          imagen1 = new ImageIcon(getClass().getResource(("user.jpg")));
+          Sesion.setIcon(new ImageIcon(imagen1.getImage().getScaledInstance(Sesion.getWidth(), Sesion.getHeight(), Image.SCALE_DEFAULT)));
+          
+          imagen2 = new ImageIcon(getClass().getResource(("TAQUILLA.png")));
+          taqui.setIcon(new ImageIcon(imagen2.getImage().getScaledInstance(taqui.getWidth(), taqui.getHeight(), Image.SCALE_DEFAULT)));
+          imagen3 = new ImageIcon(getClass().getResource(("dulce3.png")));
+          dulce.setIcon(new ImageIcon(imagen3.getImage().getScaledInstance(dulce.getWidth(), dulce.getHeight(), Image.SCALE_DEFAULT)));
+          
     }
 
     /**
@@ -53,8 +64,8 @@ public class bienvenido extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        dulce = new javax.swing.JButton();
+        taqui = new javax.swing.JButton();
         fondo1 = new javax.swing.JLabel();
         Sesion = new javax.swing.JButton();
         fondo = new javax.swing.JLabel();
@@ -73,23 +84,23 @@ public class bienvenido extends javax.swing.JFrame {
         });
         jPanel1.setLayout(null);
 
-        jButton1.setText("Dulceria");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        dulce.setText("Dulceria");
+        dulce.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                dulceActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1);
-        jButton1.setBounds(10, 11, 88, 58);
+        jPanel1.add(dulce);
+        dulce.setBounds(20, 20, 200, 100);
 
-        jButton2.setText("taquella");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        taqui.setText("taquella");
+        taqui.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                taquiActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2);
-        jButton2.setBounds(368, 14, 84, 52);
+        jPanel1.add(taqui);
+        taqui.setBounds(242, 14, 210, 100);
         jPanel1.add(fondo1);
         fondo1.setBounds(4, 4, 480, 230);
 
@@ -103,7 +114,7 @@ public class bienvenido extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Sesion);
-        Sesion.setBounds(360, 300, 69, 23);
+        Sesion.setBounds(190, 280, 90, 70);
         getContentPane().add(fondo);
         fondo.setBounds(0, -6, 490, 370);
 
@@ -118,13 +129,13 @@ public class bienvenido extends javax.swing.JFrame {
         if(vandera =l.valido1())
         {
             System.out.println("verdadero");
-            jButton1.setVisible(true);
-            jButton2.setVisible(true);
+            dulce.setVisible(true);
+            taqui.setVisible(true);
         }
         else
         {
-         jButton1.setVisible(false);
-            jButton2.setVisible(false);   
+         dulce.setVisible(false);
+            taqui.setVisible(false);   
         }
     }//GEN-LAST:event_SesionActionPerformed
 
@@ -133,30 +144,30 @@ public class bienvenido extends javax.swing.JFrame {
         if(vandera =l.valido1())
         {
             System.out.println("verdadero");
-            jButton1.setVisible(true);
-            jButton2.setVisible(true);
+            dulce.setVisible(true);
+            taqui.setVisible(true);
         }
         else
         {
-         jButton1.setVisible(false);
-            jButton2.setVisible(false);   
+         dulce.setVisible(false);
+            taqui.setVisible(false);   
         }
        }catch(Exception e){
            
        }
     }//GEN-LAST:event_jPanel1MouseEntered
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void taquiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_taquiActionPerformed
         // TODO add your handling code here:
         
         taquilla.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_taquiActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void dulceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dulceActionPerformed
         MenuDulceria dulceria=new MenuDulceria();
         dulceria.setVisible(true);
         lista_dulce.add(dulceria);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_dulceActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,10 +206,10 @@ public class bienvenido extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Sesion;
+    private javax.swing.JButton dulce;
     private javax.swing.JLabel fondo;
     private javax.swing.JLabel fondo1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton taqui;
     // End of variables declaration//GEN-END:variables
 }
