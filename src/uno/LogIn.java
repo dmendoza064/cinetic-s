@@ -141,6 +141,7 @@ public class LogIn extends javax.swing.JFrame {
                     tfClave.setText(null);
                     valido=true;
                     paso_paso();
+                   empleado.setEmpleadoNombre(jlNombre.getText());
                 }
                 if (cbId.getSelectedItem().equals(2) && Integer.parseInt(tfClave.getText()) == claves[1]) {
                     empleados[indice] = new Empleados();
@@ -148,6 +149,7 @@ public class LogIn extends javax.swing.JFrame {
                     tfClave.setText(null);
                     valido = true;
                     paso_paso();
+                     empleado.setEmpleadoNombre(jlNombre.getText());
                 }
                 if (cbId.getSelectedItem().equals(3) && Integer.parseInt(tfClave.getText()) == claves[2]) {
                     empleados[indice] = new Empleados();
@@ -155,6 +157,7 @@ public class LogIn extends javax.swing.JFrame {
                     tfClave.setText(null);
                     valido = true;
                     paso_paso();
+                   empleado.setEmpleadoNombre(jlNombre.getText());
                 }
                 if (cbId.getSelectedItem().equals(4) && Integer.parseInt(tfClave.getText()) == claves[3]) {
                     empleados[indice] = new Empleados();
@@ -162,6 +165,7 @@ public class LogIn extends javax.swing.JFrame {
                     tfClave.setText(null);
                     valido = true;
                     paso_paso();
+                    empleado.setEmpleadoNombre(jlNombre.getText());
                 }
                 if (!valido) {
                     valido=false;
