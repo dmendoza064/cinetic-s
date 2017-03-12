@@ -7,7 +7,10 @@
 package uno;
 
 import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -18,47 +21,152 @@ import javax.swing.table.DefaultTableModel;
  */
 public class MenuDulceria extends javax.swing.JFrame {
 Dulceria[] inventario;
+
 ArrayList lista=new ArrayList();
 int posision;
 boolean encontrado=false;
+LeerBits lb ;
+File archivo;
     DefaultTableModel modelo =new DefaultTableModel();
+    ImageIcon imagen[]= new ImageIcon[12];
+    
+    List<Dulceria> listInventario;
+    
+    LeerBits l ;
+    String nombre[];
+    int tamaño;
     
     /**
      * Creates new form MenuDulceria
      */
-    public MenuDulceria() {
+    public MenuDulceria() throws IOException
+    {
         initComponents();
         inventario = new Dulceria[12];
-        agregarDulces();
+        
         jPanel1.setVisible(false);
         modelo.addColumn("descripcion");
         modelo.addColumn("precio");
         modelo.addColumn("cantidad");
         jTable1.setModel(modelo);
+        listInventario = new ArrayList<>();
+        listarImagenes();
+        archivo1();
+        
     }
-     public void agregarDulces()
-     {
-         inventario[0]=new Dulceria( "Refresco", "Refresco Grande", 50.00f,new ImageIcon(getClass().getResource("vaso.jpg")));
-         inventario[1]=new Dulceria( "Refresco", "Refresco Mediano", 25.00f,new ImageIcon(getClass().getResource("vaso.jpg")));
-         inventario[2]=new Dulceria( "Refresco", "Refresco Chico", 15.50f,new ImageIcon(getClass().getResource("vaso.jpg")));
-         inventario[3]=new Dulceria( "Palomitas", "Palomitas Grande", 38.00f,new ImageIcon(getClass().getResource("Palomitas.png")));
-         inventario[4]=new Dulceria( "Palomitas", "Palomitas Mediana", 28.00f,new ImageIcon(getClass().getResource("Palomitas.png")));
-         inventario[5]=new Dulceria( "Palomitas", "Palomitas Chica", 18.50f,new ImageIcon(getClass().getResource("Palomitas.png")));
-         inventario[6]=new Dulceria( "Nachos", "Nachos Grandes", 48.99f,new ImageIcon(getClass().getResource("nacho.jpg")));
-         inventario[7]=new Dulceria( "Nachos", "Nachos Grandes con extra queso", 55.50f,new ImageIcon(getClass().getResource("nacho.jpg")));
-         inventario[8]=new Dulceria( "Nachos", "Nachos chicos", 28.10f,new ImageIcon(getClass().getResource("nacho.jpg")));
-         inventario[9]=new Dulceria( "Dulces", "Gomitas", 18.00f,new ImageIcon(getClass().getResource("gomas.jpg")));
-         inventario[10]=new Dulceria( "Dulces", "Helado", 25.90f,new ImageIcon(getClass().getResource("helado.jpg")));
-         inventario[11]=new Dulceria( "Dulces", "Chocolates", 14.50f,new ImageIcon(getClass().getResource("kiss.jpg")));
+    public void listarImagenes(){
+        imagen[0] = new ImageIcon(getClass().getResource("vaso.jpg"));
+        imagen[1] = new ImageIcon(getClass().getResource("Palomitas.png"));
+        imagen[2] = new ImageIcon(getClass().getResource("nacho.jpg"));
+        imagen[3] = new ImageIcon(getClass().getResource("gomas.jpg"));
+        imagen[4] = new ImageIcon(getClass().getResource("helado.jpg"));
+        imagen[5] = new ImageIcon(getClass().getResource("kiss.jpg"));
+        
          
          
-     }
+        
+        
+    }
+    public void archivo1()
+    {
+        try {
+            archivo = new File("inventario.txt");
+            if(!archivo.exists())
+            {
+                System.out.println( "no creado");
+                if (archivo.createNewFile()) {  //se crea el fichero. Si se ha creado correctamente
+                        System.out.println("Fichero " + archivo.getName() + " creado");
+                        l = new LeerBits(archivo);
+                        
+                        agregarArchio();
+                         
+                    } else {
+                        System.out.println("No se ha podido crear " + archivo.getName());
+                    }
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "archivo existente");
+                l= new LeerBits(archivo);
+                tamaño=1;
+                agregarArchio();
+                
+            }
+        } catch (Exception e) {
+        }
+    }
+    
+    public void agregarArchio() throws IOException
+    {
+        System.out.println(tamaño);
+        
+        if(archivo.length()==0)
+        {
+            
+            System.out.println("se le agregaran los datos");
+        
+             
+         listInventario.add(new Dulceria( "Refresco", "Refresco Grande", 50.00f,5));
+         listInventario.add(new Dulceria( "Refresco", "Refresco Mediano", 25.00f,5));
+         listInventario.add(new Dulceria( "Refresco", "Refresco Chico", 15.50f,5));
+         listInventario.add(new Dulceria( "Palomitas", "Palomitas Grande", 38.00f,5));
+         listInventario.add(new Dulceria( "Palomitas", "Palomitas Mediana", 28.00f,5));
+         listInventario.add(new Dulceria( "Palomitas", "Palomitas Chica", 18.50f,5));
+         listInventario.add(new Dulceria( "Nachos", "Nachos Grandes", 48.99f,5));
+         listInventario.add(new Dulceria( "Nachos", "Nachos Grandes con extra queso", 55.50f,5));
+         listInventario.add(new Dulceria( "Nachos", "Nachos chicos", 28.10f,5));
+         listInventario.add(new Dulceria( "Dulces", "Gomitas", 18.00f,5));
+         listInventario.add(new Dulceria( "Dulces", "Helado", 25.90f,5));
+         listInventario.add(new Dulceria( "Dulces", "Chocolates", 14.50f,5));
+            try {
+            
+                
+            
+                for (int i = 0; i <listInventario.size(); i++) {
+                    l.Escribe(listInventario.get(i));
+                    System.out.println(listInventario.get(i).getNombre());
+                    System.out.println(listInventario.get(i).getDescripcion());
+                    System.out.println(listInventario.get(i).getPrecio());
+                    System.out.println(listInventario.get(i).getCantidad());
+                }
+                
+            
+            
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+            
+            
+        
+        }
+        else
+                {
+                    System.out.println("tiene contenido el archivo"); 
+                    try {
+            l= new LeerBits(archivo);
+            
+             listInventario = l.lee();
+ 
+            for (Dulceria dl : listInventario) {
+                System.out.print(dl.getNombre()+ "\t");
+                System.out.print(dl.getDescripcion()+ "\t");
+                System.out.print(dl.getPrecio()+ "\t");
+                System.out.println(dl.getCantidad());
+            }
+                        
+        } catch (IOException ex) {
+            
+        }
+                   
+                }
+    }
+    
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         imagen2 = new javax.swing.JButton();
         imagen3 = new javax.swing.JButton();
@@ -73,21 +181,9 @@ boolean encontrado=false;
         comprar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jComboBox1 = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-
-        jButton1.setText("busqueda");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         imagen2.setText("jButton2");
         imagen2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -218,30 +314,34 @@ boolean encontrado=false;
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Elegir", "Refresco", "Palomitas", "Nachos", "Dulces", " " }));
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(43, 43, 43)
-                        .addComponent(jButton1)
-                        .addGap(247, 247, 247))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -249,46 +349,6 @@ boolean encontrado=false;
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String busqueda;
-        busqueda = jTextField1.getText();
-        System.out.println(busqueda);
-        boolean bandera=false;
-        int con=0;
-        
-        for (int i = 0; i < inventario.length; i++) {
-            if(inventario[i].getNombre().equalsIgnoreCase(busqueda))
-            { 
-            bandera=true;
-            con=i;
-               jPanel1.setVisible(true);
-               System.out.println("posisión: "+con);
-               encontrado=true;
-               posision=i;
-            break;
-            }
-            
-        }
-        if (!bandera) {
-            encontrado=false;
-        }
-        if(bandera)
-        {
-            
-               imagen1.setIcon(new ImageIcon(inventario[con].getImagen().getImage().getScaledInstance(imagen1.getWidth(), imagen1.getHeight(), Image.SCALE_DEFAULT)));
-               des1.setText(inventario[con].getDescripcion());
-               precio1.setText(""+inventario[con].getPrecio());
-               con++;
-               imagen2.setIcon(new ImageIcon(inventario[con].getImagen().getImage().getScaledInstance(imagen1.getWidth(), imagen1.getHeight(), Image.SCALE_DEFAULT)));
-               des2.setText(inventario[con].getDescripcion());
-               precio2.setText(""+inventario[con].getPrecio());
-               con++;
-               imagen3.setIcon(new ImageIcon(inventario[con].getImagen().getImage().getScaledInstance(imagen1.getWidth(), imagen1.getHeight(), Image.SCALE_DEFAULT)));
-               des3.setText(inventario[con].getDescripcion());
-               precio3.setText(""+inventario[con].getPrecio());
-            }
-    }//GEN-LAST:event_jButton1ActionPerformed
     public double regresa_total(){
         double total=0;
         try{
@@ -315,7 +375,7 @@ boolean encontrado=false;
         try{
         if (encontrado) {
             int cantidad=Integer.parseInt(JOptionPane.showInputDialog("digite cantidad")); 
-            Object[] dato={inventario[posision].getDescripcion(),inventario[posision].getPrecio(),cantidad};
+            Object[] dato={listInventario.get(posision).getDescripcion(),listInventario.get(posision).getPrecio(),cantidad};
         modelo.addRow(dato);
         //jTable1.setModel(new DefaultTableModel());
         jTable1.setModel(modelo);
@@ -327,7 +387,7 @@ boolean encontrado=false;
         try{
         if (encontrado) {
             int cantidad=Integer.parseInt(JOptionPane.showInputDialog("digite cantidad")); 
-            Object[] dato={inventario[posision+1].getDescripcion(),inventario[posision+1].getPrecio(),cantidad};
+            Object[] dato={listInventario.get(posision+1).getDescripcion(),listInventario.get(posision+1).getPrecio(),cantidad};
         modelo.addRow(dato);
         //jTable1.setModel(new DefaultTableModel());
         jTable1.setModel(modelo);
@@ -339,7 +399,7 @@ boolean encontrado=false;
         try{
         if (encontrado) {
             int cantidad=Integer.parseInt(JOptionPane.showInputDialog("digite cantidad")); 
-            Object[] dato={inventario[posision+2].getDescripcion(),inventario[posision+2].getPrecio(),cantidad};
+            Object[] dato={listInventario.get(posision+2).getDescripcion(),listInventario.get(posision+2).getPrecio(),cantidad};
         modelo.addRow(dato);
         //jTable1.setModel(new DefaultTableModel());
         jTable1.setModel(modelo);
@@ -369,9 +429,60 @@ boolean encontrado=false;
         }
     }//GEN-LAST:event_comprarActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+        String busqueda;
+        busqueda = jTextField1.getText();
+        System.out.println(busqueda);
+        boolean bandera=false;
+        int con=0;
+       
+        for (int i = 0; i < listInventario.size(); i++) {
+            if(jComboBox1.getSelectedItem().equals(listInventario.get(i).getNombre()))
+            { 
+            bandera=true;
+            con++;
+               jPanel1.setVisible(true);
+               System.out.println("posisión: "+con);
+               encontrado=true;
+                System.out.println(jComboBox1.getSelectedIndex());
+               posision=i;
+            break;
+            }
+            
+        }
+        if (!bandera) {
+            encontrado=false;
+        }
+        if(bandera)
+        {
+            
+               imagen1.setIcon(new ImageIcon(imagen[jComboBox1.getSelectedIndex()-1].getImage().getScaledInstance(imagen1.getWidth(), imagen1.getHeight(), Image.SCALE_DEFAULT)));
+                des1.setText(listInventario.get(posision).getDescripcion());
+               precio1.setText(""+listInventario.get(posision).getPrecio());
+               if((jComboBox1.getSelectedIndex()-1)>2)
+               {
+              imagen2.setIcon(new ImageIcon(imagen[jComboBox1.getSelectedIndex()].getImage().getScaledInstance(imagen1.getWidth(), imagen1.getHeight(), Image.SCALE_DEFAULT)));
+               des2.setText(listInventario.get(posision+1).getDescripcion());
+               precio2.setText(""+listInventario.get(posision+1).getPrecio());
+               
+               imagen3.setIcon(new ImageIcon(imagen[jComboBox1.getSelectedIndex()+1].getImage().getScaledInstance(imagen1.getWidth(), imagen1.getHeight(), Image.SCALE_DEFAULT)));
+               des3.setText(listInventario.get(posision+2).getDescripcion());
+               precio3.setText(""+listInventario.get(posision+2).getPrecio());
+               }
+               else
+               {
+                   imagen2.setIcon(new ImageIcon(imagen[jComboBox1.getSelectedIndex()-1].getImage().getScaledInstance(imagen1.getWidth(), imagen1.getHeight(), Image.SCALE_DEFAULT)));
+               des2.setText(listInventario.get(posision+1).getDescripcion());
+               precio2.setText(""+listInventario.get(posision+1).getPrecio());
+               
+               imagen3.setIcon(new ImageIcon(imagen[jComboBox1.getSelectedIndex()-1].getImage().getScaledInstance(imagen1.getWidth(), imagen1.getHeight(), Image.SCALE_DEFAULT)));
+               des3.setText(listInventario.get(posision+2).getDescripcion());
+               precio3.setText(""+listInventario.get(posision+2).getPrecio());
+               }
+            }
+        
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -416,12 +527,11 @@ boolean encontrado=false;
     private javax.swing.JButton imagen1;
     private javax.swing.JButton imagen2;
     private javax.swing.JButton imagen3;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel precio1;
     private javax.swing.JLabel precio2;
     private javax.swing.JLabel precio3;

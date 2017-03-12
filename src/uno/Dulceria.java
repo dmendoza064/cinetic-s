@@ -15,13 +15,13 @@ import javax.swing.ImageIcon;
 public class Dulceria {
     private String nombre,descripcion;
     private float precio;
-    private ImageIcon imagen;
+    private int cantidad;
 
-    public Dulceria(String nombre, String descripcion, float precio, ImageIcon imagen) {
+    public Dulceria(String nombre, String descripcion, float precio, int cantidad) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
-        this.imagen = imagen;
+        this.cantidad = cantidad;
     }
 
     public String getNombre() {
@@ -36,8 +36,8 @@ public class Dulceria {
         return precio;
     }
 
-    public ImageIcon getImagen() {
-        return imagen;
+    public int getCantidad() {
+        return cantidad;
     }
 
     public void setNombre(String nombre) {
@@ -52,14 +52,18 @@ public class Dulceria {
         this.precio = precio;
     }
 
-    public void setImagen(ImageIcon imagen) {
-        this.imagen = imagen;
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 
     @Override
     public String toString() {
-        return "Dulceria{" + "nombre=" + nombre + ", descripcion=" + descripcion + ", precio=" + precio + ", imagen=" + imagen + '}';
+        return "Dulceria{" + "nombre=" + nombre + ", descripcion=" + descripcion + ", precio=" + precio + ", cantidad=" + cantidad + '}';
     }
+    
+    
+
+    
 
     
     

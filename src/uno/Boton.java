@@ -6,6 +6,7 @@ import java.awt.Event;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.Serializable;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -15,7 +16,7 @@ import static javax.swing.Spring.width;
  *
  * @author jonathan
  */
-public class Boton extends JButton implements ActionListener {
+public class Boton extends JButton implements ActionListener,Serializable {
     
     public Boton(int posx,int posy,int ancho,int alto){
     super.setBounds(posx,posy,ancho,alto);

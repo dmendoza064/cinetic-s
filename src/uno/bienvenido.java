@@ -8,7 +8,10 @@ package uno;
 
 import com.sun.awt.AWTUtilities;
 import java.awt.Image;
+import java.io.IOException;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 
@@ -164,7 +167,12 @@ public class bienvenido extends javax.swing.JFrame {
     }//GEN-LAST:event_taquiActionPerformed
 
     private void dulceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dulceActionPerformed
-        MenuDulceria dulceria=new MenuDulceria();
+        MenuDulceria dulceria = null;
+        try {
+            dulceria = new MenuDulceria();
+        } catch (IOException ex) {
+            Logger.getLogger(bienvenido.class.getName()).log(Level.SEVERE, null, ex);
+        }
         dulceria.setVisible(true);
         lista_dulce.add(dulceria);
     }//GEN-LAST:event_dulceActionPerformed
