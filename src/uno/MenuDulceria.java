@@ -431,9 +431,8 @@ File archivo;
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
         // TODO add your handling code here:
-        String busqueda;
-        busqueda = jTextField1.getText();
-        System.out.println(busqueda);
+        
+        
         boolean bandera=false;
         int con=0;
        
